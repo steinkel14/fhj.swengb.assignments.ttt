@@ -139,7 +139,14 @@ case class TicTacToe(moveHistory: Map[TMove, Player],
     *
     * The game is over if either of a player wins or there is a draw.
     */
-  //val gameOver : Boolean = ???
+  val gameOver : Boolean =
+  {
+    if(winner!=None || moveHistory.size ==9 )
+      {
+        true
+      }
+    else false
+  }
 
   /**
     * the moves which are still to be played on this tic tac toe.
