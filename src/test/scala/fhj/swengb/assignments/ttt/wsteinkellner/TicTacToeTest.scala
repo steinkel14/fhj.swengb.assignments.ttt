@@ -1,8 +1,8 @@
-package fhj.swengb.assignments.ttt.rladstaetter
+package fhj.swengb.assignments.ttt.wsteinkellner
 
 import org.junit.Assert._
 import org.junit.Test
-
+/*
 /**
   * Tests the tic tac toe game engine.
   */
@@ -42,3 +42,4 @@ class TicTacToeTest {
   // implement yourself more tests
 
 }
+*/
