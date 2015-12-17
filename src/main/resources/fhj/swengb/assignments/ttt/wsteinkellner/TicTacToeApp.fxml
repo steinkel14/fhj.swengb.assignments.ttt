@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:controller="fhj.swengb.assignments.ttt.wsteinkellner.TicTacToeController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -18,16 +19,31 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-             <Button mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" GridPane.rowIndex="0" GridPane.columnIndex="0" />
-             <Button mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" GridPane.rowIndex="0" GridPane.columnIndex="1" />
-             <Button mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" GridPane.rowIndex="0" GridPane.columnIndex="2" />
-             <Button mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" GridPane.rowIndex="1" GridPane.columnIndex="0" />
-             <Button mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" GridPane.rowIndex="1" GridPane.columnIndex="1" />
-             <Button mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
-             <Button mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-             <Button mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-             <Button mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+             <Button fx:id="btnTL" class="button3x3" mnemonicParsing="false" onAction="#btnClickTL" prefHeight="Infinity" prefWidth="Infinity" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+             <Button fx:id="btnTC" mnemonicParsing="false" onAction="#btnClickTC" prefHeight="Infinity" prefWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+             <Button fx:id="btnTR" mnemonicParsing="false" onAction="#btnClickTR" prefHeight="Infinity" prefWidth="Infinity" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+             <Button fx:id="btnML" mnemonicParsing="false" onAction="#btnClickML" prefHeight="Infinity" prefWidth="Infinity" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+             <Button fx:id="btnMC" mnemonicParsing="false" onAction="#btnClickMC" prefHeight="Infinity" prefWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+             <Button fx:id="btnMR" mnemonicParsing="false" onAction="#btnClickMR" prefHeight="Infinity" prefWidth="Infinity" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+             <Button fx:id="btnBL" mnemonicParsing="false" onAction="#btnClickBL" prefHeight="Infinity" prefWidth="Infinity" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+             <Button fx:id="btnBC" mnemonicParsing="false" onAction="#btnClickBC" prefHeight="Infinity" prefWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+             <Button fx:id="btnBR" mnemonicParsing="false" onAction="#btnClickBR" prefHeight="Infinity" prefWidth="Infinity" GridPane.columnIndex="2" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </center>
+   <top>
+      <Label alignment="CENTER" prefHeight="75" prefWidth="Infinity" text="TicTacToeGame" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+   </top>
+   <left>
+      <Label prefWidth="40" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <Label prefWidth="40" BorderPane.alignment="CENTER" />
+   </right>
+   <bottom>
+      <Label prefHeight="40" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>

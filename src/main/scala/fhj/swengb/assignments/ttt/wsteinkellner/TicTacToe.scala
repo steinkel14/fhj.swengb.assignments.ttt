@@ -141,7 +141,7 @@ case class TicTacToe(moveHistory: Map[TMove, Player],
     */
   val gameOver : Boolean =
   {
-    if(winner!=None || moveHistory.size ==9 )
+    if(winner == Some(PlayerA) || winner == Some(PlayerB) || moveHistory.size ==9 )
       {
         true
       }
@@ -166,98 +166,73 @@ case class TicTacToe(moveHistory: Map[TMove, Player],
     * games which can be derived by making the next turn. that means one of the
     * possible turns is taken and added to the set.
     */
-  //lazy val nextGames: Set[TicTacToe] = ???
+  lazy val nextGames: Set[TicTacToe] =
+  {
+    var ttt: Set[TicTacToe] = Set()
+    var nextP = nextPlayer
+    if(nextPlayer == PlayerA)
+      {
+        nextP = PlayerB
+      }
+    else nextP = PlayerA
+
+    var freeField:Set[TMove] = Set(TopLeft,TopCenter,TopRight,MiddleLeft, MiddleCenter, MiddleRight, BottomLeft, BottomCenter, BottomRight)
+    for((key,value)<- moveHistory){
+      freeField -= key
+    }
+    for(el <- freeField){
+      val addTicTacToe = Set(TicTacToe(Map(el->nextPlayer),nextP ))
+      ttt = ttt ++ addTicTacToe
+    }
+    ttt
+  }
 
   /**
     * Either there is no winner, or PlayerA or PlayerB won the game.
     *
     * The set of moves contains all moves which contributed to the result.
     */
-  def winner: Option[(Player, Set[TMove])] =
-  {
-    if(moveHistory.size >= 6)
-      {
-        if(moveHistory.contains(TopLeft) && moveHistory.contains(TopCenter) && moveHistory.contains(TopRight))
-          {
-            if(moveHistory(TopLeft) == moveHistory(TopCenter) == moveHistory(TopCenter) == moveHistory(TopRight))
-            {
-              val set: Set[TMove] = Set(TopLeft, TopCenter, TopRight)
-              return Some(moveHistory(TopLeft), set)
-            }
-            else return None
-          }
-        else if(moveHistory.contains(MiddleLeft) && moveHistory.contains(MiddleCenter) && moveHistory.contains(MiddleRight))
-        {
-          if(moveHistory(MiddleLeft) == moveHistory(MiddleCenter) == moveHistory(TopRight))
-          {
-            val set: Set[TMove] = Set(MiddleLeft, MiddleCenter, MiddleRight)
-            return Some(moveHistory(MiddleLeft), set)
-          }
-          else return None
-        }
+  def winner: Option[(Player, Set[TMove])] = {
+    if ((moveHistory(TopLeft) == moveHistory(TopCenter) == moveHistory(TopRight)) && moveHistory(TopLeft) != null) {
+      val set: Set[TMove] = Set(TopLeft, TopCenter, TopRight)
+      Some(moveHistory(TopLeft), set)
+    }
 
-        else if(moveHistory.contains(BottomLeft) && moveHistory.contains(BottomCenter) && moveHistory.contains(BottomRight))
-        {
-          if(moveHistory(BottomLeft) == moveHistory(BottomCenter) == moveHistory(BottomRight))
-          {
-            val set: Set[TMove] = Set(BottomLeft, BottomCenter, BottomRight)
-            return Some(moveHistory(BottomLeft), set)
-          }
-          else return None
-        }
+    else if ((moveHistory(MiddleLeft) == moveHistory(MiddleCenter) == moveHistory(MiddleRight)) && moveHistory(MiddleLeft) != null) {
+      val set: Set[TMove] = Set(MiddleLeft, MiddleCenter, MiddleRight)
+      Some(moveHistory(MiddleRight), set)
+    }
 
-        else if(moveHistory.contains(TopLeft) && moveHistory.contains(MiddleCenter) && moveHistory.contains(BottomRight))
-        {
-          if(moveHistory(TopLeft) == moveHistory(MiddleCenter) == moveHistory(BottomRight))
-          {
-            val set: Set[TMove] = Set(TopLeft, MiddleCenter, BottomRight)
-            return Some(moveHistory(TopLeft), set)
-          }
-          else return None
-        }
-        else if(moveHistory.contains(TopRight) && moveHistory.contains(MiddleCenter) && moveHistory.contains(BottomLeft))
-        {
-          if(moveHistory(TopRight) == moveHistory(MiddleCenter) == moveHistory(BottomLeft))
-          {
-            val set: Set[TMove] = Set(TopRight, MiddleCenter, BottomLeft)
-            return Some(moveHistory(TopRight), set)
-          }
-          else return None
-        }
+    else if ((moveHistory(BottomLeft) == moveHistory(BottomCenter) == moveHistory(BottomRight)) && moveHistory(BottomLeft) != null) {
+      val set: Set[TMove] = Set(BottomLeft, BottomCenter, BottomRight)
+      Some(moveHistory(BottomLeft), set)
+    }
 
-        else if(moveHistory.contains(TopLeft) && moveHistory.contains(MiddleLeft) && moveHistory.contains(BottomLeft))
-        {
-          if(moveHistory(TopLeft) == moveHistory(MiddleLeft) == moveHistory(BottomLeft))
-          {
-            val set: Set[TMove] = Set(TopLeft, MiddleLeft, BottomLeft)
-            return Some(moveHistory(TopLeft), set)
-          }
-          else return None
-        }
+    else if ((moveHistory(TopLeft) == moveHistory(MiddleLeft) == moveHistory(BottomLeft)) && moveHistory(TopLeft) != null) {
+      val set: Set[TMove] = Set(TopLeft, MiddleLeft, BottomLeft)
+      Some(moveHistory(TopLeft), set)
+    }
 
-        else if(moveHistory.contains(TopCenter) && moveHistory.contains(MiddleCenter) && moveHistory.contains(BottomCenter))
-        {
-          if(moveHistory(TopCenter) == moveHistory(MiddleCenter) == moveHistory(BottomCenter))
-          {
-            val set: Set[TMove] = Set(TopCenter, MiddleCenter, BottomCenter)
-            return Some(moveHistory(TopCenter), set)
-          }
-          else return None
-        }
+    else if ((moveHistory(TopCenter) == moveHistory(MiddleCenter) == moveHistory(BottomCenter)) && moveHistory(TopCenter) != null) {
+      val set: Set[TMove] = Set(TopCenter, MiddleCenter, BottomCenter)
+      Some(moveHistory(TopCenter), set)
+    }
 
-        else if(moveHistory.contains(TopRight) && moveHistory.contains(MiddleRight) && moveHistory.contains(BottomRight))
-        {
-          if(moveHistory(TopRight) == moveHistory(MiddleRight) == moveHistory(BottomRight))
-          {
-            val set: Set[TMove] = Set(TopRight, MiddleRight, BottomRight)
-            return Some(moveHistory(TopRight), set)
-          }
-          else return None
-        }
+    else if ((moveHistory(TopRight) == moveHistory(MiddleRight) == moveHistory(BottomRight)) && moveHistory(TopRight) != null) {
+      val set: Set[TMove] = Set(TopRight, MiddleRight, BottomRight)
+      Some(moveHistory(TopRight), set)
+    }
 
+    else if ((moveHistory(TopLeft) == moveHistory(MiddleCenter) == moveHistory(BottomRight)) && moveHistory(TopLeft) != null) {
+      val set: Set[TMove] = Set(TopLeft, MiddleCenter, BottomRight)
+      Some(moveHistory(TopLeft), set)
+    }
 
-        else return None
-      }
+    else if ((moveHistory(TopRight) == moveHistory(MiddleCenter) == moveHistory(BottomLeft)) && moveHistory(TopRight) != null) {
+      val set: Set[TMove] = Set(TopRight, MiddleCenter, BottomLeft)
+      Some(moveHistory(TopRight), set)
+    }
+
     else None
   }
 
@@ -268,8 +243,17 @@ case class TicTacToe(moveHistory: Map[TMove, Player],
     * @param player the player
     * @return
     */
-  //def turn(p: TMove, player: Player): TicTacToe = ???
-
+  def turn(p: TMove, player: Player): TicTacToe = {
+    val map = Map(p -> player)
+    println("Turn" + moveHistory)
+    val addedMove = moveHistory ++ map
+    println("Turn" + addedMove)
+    if (player == PlayerA) {
+      TicTacToe(addedMove, PlayerB)
+    } else {
+      TicTacToe(addedMove, PlayerA)
+    }
+  }
 }
 
 
